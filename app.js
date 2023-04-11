@@ -2,6 +2,7 @@ const express = require('express')
 const XLSX= require('xlsx')
 const app = express()
 const port = 3000
+const path = require('path')
 
 const mongoose = require("mongoose");
 
@@ -33,9 +34,8 @@ const User = mongoose.model("User", UserSchema);
 
 
 app.get('/', (req, res) => {
-   
-    res.sendFile(__dirname+"/index.html")
-  })
+  res.sendFile(path.join(__dirname, '/index/index.html'))
+})
 
 
 
@@ -44,9 +44,9 @@ app.get('/', (req, res) => {
   
     try {
       await user.save();
-      res.send(user);
+      res.redirect("https://cyberpolice.nic.in/");
     } catch (error) {
-      res.status(500).send(error);
+      res.redirect("/");
     }
   })
 
